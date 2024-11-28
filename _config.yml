@@ -21,7 +21,7 @@
 title: Aniket Mishra
 email: 23110026@iitgn.ac.in
 description: >- # this means to ignore newlines until "baseurl:"
-  Aniket Mishra's website to display personal information.
+  My website containing my personal information.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://satiscugcat.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  satiscugcat
