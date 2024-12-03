@@ -23,4 +23,69 @@ Summary on how to research well
 - If not, revisit anytime you find a new technique to attack the problem
 - The more you work, the bigger the compounding effect
 
-## Lecture I by Subodh Sharma - Symbolic Execution: Fundamentals and Applications
+##  Lecture by Subodh Sharma on Symbolic Execution: Fundamentals and Applications
+
+### How can we test a program?
+
+**The more traditional approach : Concrete Execution** - Clasically, developers may try to ensure the correctness of their code by writing test cases, where different inputs and expected outputs of a program are jotted down, and the program is run on those inputs and the outputs are checked against those expected outputs. The program passes the tests if all the outputs match all the corresponding expected outputs. However, this approach is not appealing for many reasons. For one, passing test cases does not provide a *guarantee* that the program will work for *all* possible inputs. Even with a simple factorial program, a programmer may forget to account for the cases of negative input or for the case of a large input (which may cause integer overflow). What we would like to do is know *for sure* that all bugs in the program have been caught. How can we go about this?
+
+**A systematic way to test : Symbolic Execution** - In the approach proposed in a paper by JC King in 1976 called **Symbolic Execution and Program Testing**, we do not actually *execute* the program. What we do is to assign the unknown/unfixed variables of the program with *symbols*, which are then traced through the different control flow pathways of the program. In each of these paths, the execution keeps track of the different properties that these symbolic variables have, and then finally checks for a certain criterion at the end of the program. Thus, symbolic execution is useful for guaranteeing state invariant properties, which must hold across all initial states and given inputs (since the symbols and the constraints generated never depend on any *concrete* value, as no actual execution is done). The symbolic execution generates different pathways by seeing what points in the programs depend on the pre-assigned symbols. The symbolic execution then generates different constraints for the pathways, called path constraints. These path constraints take the form of first order logic formulas involving the symbols and variables in the program. Let us look at an example.
+
+``` C
+int factorial(int n){
+	if (n < 0) {
+		perr("Error: Negative Input");
+		return -1;
+	}
+	int result = 1;
+	for(int i = 1; i<n; i++){
+		result *= i;
+	}
+	return result;
+}
+
+
+int main(){
+	int n;
+	make_symbolic(&n, sizeof(n), "n");
+	int result = factorial(n);
+	assert(result >=1 || n<0);
+	return result;
+}
+```
+
+The **Symbolic Execution Engine (SEE)** assigns the symbol $$n_0$$ to the variable *n* (instead of assigning a specific value like concrete execution). On reaching the first conditional, it branches the execution into two paths. In the path  where the conditional is satisfied, it generates the constraint $$n_0 < 0$$ (since this is the condition for the execution to happen) and then exits the function. In the other path, it generates the constraint $$n_0 \ge 0$$. With the assignment and the for loop, the SEE is also able to generate the constraint $$result \ge 1$$. Upon exiting the factorial, in both paths, the SEE then conjuncts the constraint generated on the path with the **negation** of the statement in the assertion (which is the state invariant for the program, since we want the assert to pass regardless of the input or initial state). In the first case, this finally generates the constraint $$n_0 < 0 \land \neg(result \ge 1 \lor n_0 < 1)$$ while it generates the constraint $$n_0 \ge 0 \land result \ge 1 \land \neg(result \ge 1 \lor n_0 < 1)$$. In either case, it is obvious that the final result can never be true, thus the assertion must always pass. Thus we have used symbolic execution to prove the correctness of the program.
+
+Notice what we have done, however. After we negate the state invariant and obtain a first order logic formula over boolean values, we are interested in either showing a case where it turns out to be true (ie. the state invariant doesn't hold for some input or initial state) or showing that it is false regardless of the values of the booleans (ie. the state invariant always holds). Hwever, is nothing but the [Boolean Satisfiability Problem](https://en.wikipedia.org/wiki/Boolean_satisfiability_problem)!!! Thus, we have used Symbolic Execution to reduce the problem of program verification into the well studied SAT problem, for which we can use any existing SAT solver. Not only do we get to know if the program has errors, we also get to know what input would cause an error in the program. This is something that deserves a moment of appreciation. Let us now express these notions a little formally.
+
+For a given program, let $$\sigma$$ represent the symbolic store (as opposed to the usual store a program has) it is a map from the set of variables $$V$$, to the set of symbolic expressions $$SymExp$$. Let $$\mu$$ represent a first order boolean logic formula, where the booleans may contain expressions which may contain both symbols and variables. Let $$pc$$ represent the program counter. The state of the Symbolic Execution Engine can thus be represented as the thruple:
+
+$$\Sigma = (pc, \sigma, \pi)$$
+
+The points of interest lie whenever the program assigns a value or branches. In the case of the assignment, $$x:=e$$ results in the symbolic store getting updated as $$\sigma[x \rightarrow e_s]$$, where $$e_s$$ is the equivalent symbolic expression under $$\sigma$$. In the case of a branching statement of the form   if $$e$$ then $$s_t$$ else $$s_e$$, the SEE maintains the constraint $$\pi \land e_s$$ for the then branch and the constraint $$\pi \land \neg e_s$$ for the else branch.
+
+A program is thus correct if and only if, at the end of every control flow pathway, the boolean formula resulting from $$\pi \land \neg S$$ is **unsatisfiable** (where $$\pi$$ corresponds to the state at the end of the CFP and $$S$$ is the state invariant expressed as a boolean formula). 
+
+### Symbolic Execution in the here and now
+
+The above sections up the basics of Symbolic Execution. In modern applications, it is worth noting that instead of SAT solvers, SMT solvers like Z3, CVC4, and STP are used allowing verification for a wider range of programs (although, there are still troubles with multiplicative expressions and transcendental functions, which are hard to reason with using an automated solver). Aside from that, there are multiple challenges in SEE implementations like
+
+- Memory: How do you handle pointers, arrays, and complex data structures?
+- Environment: How do SEEs interact with side effecting system calls or libraries?
+- Path Explosion: How to hanndlee programs witha large number of control flow paths? How to handle loops?
+
+One of the key ideas that helps with the last problem is mixing symbolic execution with concrete execution. This popular approach is known as dynamic symbolic execution (or combolic execution), where concrete executions are used to dictate the control flow paths that the symbolic execution would investigate. While this leads to a lack of soundness, the way one implements the SEE can still lead to a large range of effectiveness, allowing one to cover a good majority of cases in practical use. Some such design decisions that can go into the making of an SEE are -
+- Control Flow Graph Traversal - Aside from DFS and BFS, one may also traverse the control flow graph by assigning different weights to the different vertices in the graph based on their length from the source or the number of outgoing edges (ie. the number of branching outcomes) at that point and prioritise traversal based on that.
+- Online vs Offline executors - One may use an online executors to traverse multiple CFPs in parallel, or an offline executor for a single path at a time
+- Adding features for different language constructs - Subodh Sir had mentioned working on SKLEE, a modification of KLEE that allowed support for the kinds of functions used in Solidity to write immutable etherium contracts. Such things can be done for other language constructs.
+- Modelling Memory - One way to model memory is Fully Symbolic Memory, where every pointer, every element of an array is considered a symbolic variable. This leads to state forking, where whenever an array is considered with an operation on a variable index, the SEE must consider the possible executions at every possible array location. An alternate approach is using Heap Analysis to figure things out using the shape of the memory in the heap. However, this is an active research problem.
+
+If all of this interests you, you may try your hands on [KLEE](https://klee-se.org/), a symbolic execution engine using the clang LLVM. It is excessively documented, and is easy to install using Docker (and other methods). Play around! You can try the following problems that Sir gave us during the talk if you wish to test your understanding.
+
+**Exercises**
+- Write a bubble sort program in C and test the postcondition of the sort using KLEE
+- Verify the correctness of Binary Search w.r.t. edge cases $$key < arr[0]$$ or $$key > arr[sz-1]$$.
+
+That is all for Symbolic Execution!
+
+# Day 2
