@@ -80,7 +80,7 @@ The above sections up the basics of Symbolic Execution. In modern applications, 
 
 - Memory: How do you handle pointers, arrays, and complex data structures?
 - Environment: How do SEEs interact with side effecting system calls or libraries?
-- Path Explosion: How to hanndle programs with a large number of control flow paths? How to handle loops?
+- Path Explosion: How to handle programs with a large number of control flow paths? How to handle loops?
 
 One of the key ideas that helps with the last problem is mixing symbolic execution with concrete execution. This popular approach is known as dynamic symbolic execution (or combolic execution), where concrete executions are used to dictate the control flow paths that the symbolic execution would investigate. While this leads to a lack of soundness, the way one implements the SEE can still lead to a large range of effectiveness, allowing one to cover a good majority of cases in practical use. Some such design decisions that can go into the making of an SEE are -
 - Control Flow Graph Traversal - Aside from DFS and BFS, one may also traverse the control flow graph by assigning different weights to the different vertices in the graph based on their length from the source or the number of outgoing edges (ie. the number of branching outcomes) at that point and prioritise traversal based on that.
