@@ -129,7 +129,7 @@ The rest of the session was spent on a tutorial where we tried a problem like th
 
 ## Lecture by Kumar Madhukar on Neural Network Verification Part I<a name="dnn"></a>
 
-In traditional program verification, given a program of a certain form we want to be able to prove a ceetain property about it mathematically, or give a counterexample if it does not work. 
+In this talk by [Kumar Madhukar](https://kumarmadhukar.github.io/) of IIT Delhi, to be continued in the following day, we looked at the problem of Deep Neural Network Verification. In traditional program verification, given a program of a certain form we want to be able to prove a ceetain property about it mathematically, or give a counterexample if it does not work. 
 
 ```C
 int fac(int c){
