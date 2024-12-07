@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Winter School on Formal Vertification and Program Synthesis, IIT Delhi"
+title: "Winter School on Formal Verification and Program Synthesis, IIT Delhi"
 ---
 # Table of Contents #
 1. [**Day 1**](#day1)
