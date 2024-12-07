@@ -295,7 +295,7 @@ The properties of the calculi that make them so useful as correspondences to pro
 - **Uniqueness of Types** - Every well-typed term has only one possible typing (We would like to be able to know that our proofs prove one specific proposition!)
 - **Confluence (Church-Rosser property)** - In a language like Python, evaluation of $$f(x)+g(x)$$ might depend on the order in which we evaluate the operands due to mutation. However, for the mentioned calculi, the order of reduction does not matter. This is also helpful, since we would not want the order in which we establish say, the lemmas of a proof and use them to matter for the complete proof.
 - **Type Preservation under Reduction (Subject Reduction)** - When we simplify a proof, or use a reduction rule, we do not want the theorem we are proving to change.
-- **Termination (Strong Normalisation)** - All proofs are reducible to a simplest canonical form. (More importantly, without a guarantee of strong normalisation, you cannot prove the consistency of a type system.)
+- **Termination (Strong Normalisation)** - All proofs are reducible to a simplest canonical form. (More importantly, strong normalisation also implies consistency of a type system.)
 - **Expressiveness** - With the varying calculi, we have the ability to express different kinds of constructs. Python, for example, does not have Sum types, so we cannot say that a term is one of two different types.
 Thus, with the help of these properties, well typed programs cannot "go wrong"! A famouse adage in Type Theory is that **Safety = Progress + Preservation**.
 
