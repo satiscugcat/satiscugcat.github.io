@@ -297,6 +297,7 @@ The properties of the calculi that make them so useful as correspondences to pro
 - **Type Preservation under Reduction (Subject Reduction)** - When we simplify a proof, or use a reduction rule, we do not want the theorem we are proving to change.
 - **Termination (Strong Normalisation)** - All proofs are reducible to a simplest canonical form. (More importantly, strong normalisation also implies consistency of a type system.)
 - **Expressiveness** - With the varying calculi, we have the ability to express different kinds of constructs. Python, for example, does not have Sum types, so we cannot say that a term is one of two different types.
+
 Thus, with the help of these properties, well typed programs cannot "go wrong"! A famouse adage in Type Theory is that **Safety = Progress + Preservation**.
 
 Now, what is the application of all this in Federated Learning? Federated Learning is a machine learning setting where clients keep training data decentralised between computers. This is a completely new field, and is an intersection between machine learning and formal verification! However, there is AI Engineers  and for Formal Verification scientists use completely different modes of communication. Thus there is interest in developing a common language for the both of them. Some related work has been
