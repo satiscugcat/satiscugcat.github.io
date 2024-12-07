@@ -12,7 +12,7 @@ title: "Winter School on Formal Vertification and Program Synthesis, IIT Delhi"
    3. [**Lecture by Kumar Madhukar on Neural Network Verification Part I**](#dnn)
 3. [**Day 3**](#day3)
    1. [**Lecture by Kumar Madhukar on Neural Network Verification Part II**](#dnn2)
-   2. [**Talk by Silvia Ghilezan Proofs as Programming Paradigms: From Logic to AI**](#lambda)
+   2. [**Talk by Silvia Ghilezan on Proofs as Programming Paradigms: From Logic to AI**](#lambda)
    3. [**Tutorial by Priyanka Golia on SAT Solvers**](#sat)
 4. [**Day 4**](#day4)
    1. [**Lecture by Priyanka Golia on SAT Solving Algorithms**](#sat2)
@@ -229,7 +229,7 @@ Now, this abstraction can be too coarse. If suppose we come across a spurious ex
 
 Sanya Mittal, a student of Professor Kumar Madhukar, ended the session on neural network verification with an hour long workshop where we explored the verifiers [Marabou](https://github.com/NeuralNetworkVerification/Marabou) and [NeuralSAT](https://github.com/dynaroars/neuralsat). It's hard to reproduce the content covered during the workshop in this format, but do explore these tools on your own! They are extensively documented enough to be useful. Although, before starting to play with them, it might be useful to know what .onnx files are and how to produce them using pytorch.
 
-## Talk by Silvia Ghilezan Proofs as Programming Paradigms: From Logic to AI<a name="lambda"></a>
+## Talk by Silvia Ghilezan on Proofs as Programming Paradigms: From Logic to AI<a name="lambda"></a>
 
 ### The Curry-Howard Isomorphism
 
