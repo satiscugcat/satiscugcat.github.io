@@ -10,7 +10,14 @@ title: "Winter School on Formal Vertification and Program Synthesis, IIT Delhi"
    1. [**Talk by Ravindra Metta on Formal Verification and Synthesis at TCS Research**](#tcs)
    2. [**Lecture+Tutorial by Aalok Thakkar on Introduction to Enumerative Synthesis**](#as)
    3. [**Lecture by Kumar Madhukar on Neural Network Verification Part I**](#dnn)
-
+3. [**Day 3**](#day3)
+   1. [**Lecture by Kumar Madhukar on Neural Network Verification Part II**](#dnn2)
+   2. [**Talk by Silvia Ghilezan Proofs as Programming Paradigms: From Logic to AI**](#lambda)
+   3. [**Tutorial by Priyanka Golia on SAT Solvers Part I**](#sat)
+4. [**Day 4**](#day4)
+   1. [**Tutorial by Priyanka Golia on SAT Solvers Part II**](#sat2)
+   2. [**Invited Lecture**](#inv)
+   3. [**A Final Interaction**](#end)
 # Day 1 <a name="day1"></a> #
 
 ## Talk by Prof Sanjam Garg on his Research Journey <a name="sanjam"></a> ##
@@ -179,8 +186,205 @@ Now, considering this techique, what are the problems we face in this method? Ac
 - Repairing Networks to follow some formal parameters
 - Explainability of DNNs
 
-[Marabou](https://github.com/NeuralNetworkVerification/Marabou) and [NeuralSAT](https://github.com/dynaroars/neuralsat) are tools that have their own implementations for neural network implementation. 
+[Marabou](https://github.com/NeuralNetworkVerification/Marabou) and [NeuralSAT](https://github.com/dynaroars/neuralsat) are tools that have their own implementations for neural network verification.. 
 
 This is a difficult problem, however. Trying to simply use SAT solvers to solve these properties for neural networks can be extremely time consuming. One other approach that was proposed in 2017 was [Reluplex](https://arxiv.org/pdf/1702.01135), which is based on extending the [Simplex](https://en.wikipedia.org/wiki/Simplex_algorithm) method in linear programming to handle FFNNs using RELU activation function, and shows that even verifying simple things about them is NP-complete. Also, since Simplex only works for linear constraints (as it is an algorithm for linear programming), it can only prove properties about the neural network that take the form of linear constraints.  The lecture closely follows the paper from this point on. This approach while simple and not very elegant at first glance, turned out to be much more efficient than SAT solvers for this kind of problem, verifying properties in within a minute which SAT solvers weren't able to in 14400. This is a big deal, especially when the problem is (as the very same paper shows) NP-complete.
 
-That is all for today, Professor Madhukar will continue his exploration into DNN verification tomorrow.
+That was all for the the day, with the rest to be touched upon in the following day.
+
+# Day 3 <a name="day3"></a>
+
+## Lecture by Kumar Madhukar on Neural Network Verification Part II <a name="dnn2"></a>
+
+### Abstraction Refinement
+
+Today, we explored the strategy of [Abstraction Refinement for Neural Networks](https://arxiv.org/pdf/1910.14574), where we try to analyse if a neural metwork can be replaced by a smaller network. Suppose we have a neural network **N**, we construct  a smaller network **N'**, such that if **N'** violates the specification, so does **N**. If **N'** meets the specification, then all good! If not, there must be a counterexample *x*. Now, if *x* violates the specification for **N** also, then the original neural network violates the specification, and we have proven that it does not. Otherwise (ie. if the counterexample is spurious), we can refine **N'** more to make it more accurate, and "larger". Thus we use the **Counterexample-Guided Abstraction Refinemenet** strategy, where we use counterexamples to either refine the neural network, or prove that a specification does not hold.
+
+Now, let us look at the strategy proposed in the paper deeper. Let us say we have a precondition **P**. postcondition **Q**, and network **N**. A neural network is safe if for every input **x** such that **P(x)** and **Q(N(x))** hold. The paper assumes that
+- there is only one output neuron, and only ReLU activation function are used.
+- the property of interest is that the output is never greater than some constant
+
+In the transformation, the neural network **N'** is such that **N(x) <= N'(x)**. If **N'** is safe, then so must **N** because of the nature of the postconditiion. Now how do we do construct such a network? We follow the general abstraction-refinement strategy and merging and splitting neurons in an equivalent network **N''**. Now, here is the general strategy -
+- If a neuron has only positive outgoing edges,  we classify it as **pos**
+- If a neuron has only negative outgoing edges,  we classify it as **neg**
+- Otherwise, we split the neuron into two neurons, such that one has all the positive outgoing edges of the original neuron, while the other has all the negative outgoing edges of the original neuron, such that they both have all the incoming edges of the original neuron.
+
+After this is done, all neurons are marked **inc** or **dec**, if increasing the value of the neuron increases the output, and if decrementing the value of the neuron decreases the input. The algorithm for this is as follows -
+- The output is marked **inc** (increasing the output increases the output)
+- Now, until all neurons are marked
+  - All vertices in the layer about to be marked are split, sharing incoming edges, such one neuron only connects to **inc** neurons, and the other only connects to **dec** neurons
+  - All neurons with positive weight edges to **inc** neurons, and all neurons with negative weight edges to **dec** neurons are marked **inc**
+  - All neurons with positive weight edges to **dec** neurons, and all neurons with negative weight edges to **inc** neurons are marked **dec**
+
+Now after doing all the splitting, we start merging.
+- We merge neurons in the same layer. We merge neurons only in with the same pair of **pos/neg** and **inc/dec** tags.
+- There are two cases when merging two neurons
+  - They share **inc** tags: For every vertex with incoming edges from both the neurons, we sum the edges for the new neuron. For every vertex with outgoing edges to both the neurons, we take the maximum value for the edge of the new neuron. (This will only increase the possible output, preserving **N(x) <= N'(x)**.)
+  - They share **dec** tags: For every vertex with incoming edges from both the neurons, we sum the edges for the new neuron. For every vertex with outgoing edges to both the neurons, we take the nimimum value for the edge of the new neuron.  (This will only increase the possible output, preserving **N(x) <= N'(x)**.)
+It is possible to show that regardless of the order of merging, we always get the same final neural network by the above algorithm.
+
+Now, this abstraction can be too coarse. If suppose we come across a spurious example (as discussed earlier), we pick a concrete neuron from an absract neuron , and put it back into the network until we come across an abstraction that does not generate spurious examples. (An question: Is the **pos/neg** split really needed? It is also worth thinking about how limiting the constraints on the postcondition and the output layers are, the paper discusses further about this. Go read it!) There are other kinds of refinement techniques too, some which merge two neurons together depending on if they have similar enough inputs, following a k-means clustering strategy.
+
+### Some Hands on Work
+
+Sanya Mittal, a student of Professor Kumar Madhukar, ended the session on neural network verification with an hour long workshop where we explored the verifiers [Marabou](https://github.com/NeuralNetworkVerification/Marabou) and [NeuralSAT](https://github.com/dynaroars/neuralsat). It's hard to reproduce the content covered during the workshop in this format, but do explore these tools on your own! They are extensively documented enough to be useful. Although, before starting to play with them, it might be useful to know what .onnx files are and how to produce them using pytorch.
+
+## Talk by Silvia Ghilezan Proofs as Programming Paradigms: From Logic to AI<a name="lambda"></a>
+
+### The Curry-Howard Isomorphism
+
+*(If the title of this sounds interesting to you, but you the stuff discussed below, you may find this video on [Propositions as Types by Philip Wadler](https://youtu.be/IOiZatlZtGU) useful, appealing, and possibly funny.)*
+
+This was a talk held by [Silvia Ghilezan](https://imft.ftn.uns.ac.rs/silvia/Main) on the correspondence between logical systems and programming languages, and the applications it has in our day to day lives. This correspondence is famously called the **Curry-Howard Isomorphism**. The Curry-Howard isomorphism was stated in reflection of the fact that throughout history, logicians and computer scientists have kept coming up with logical systems and programming languages (or models of computation) that are suspiciously similar. Some such examples are-
+
+- **The Axiomatic System and Combinatory Logic** - The axiomatic system (also referred to as intuitionistic logic) is a system of logic which fixes some axioms, and claims that any object constructed in the system must be from those axioms. For example, the **Peano axiomatisation of natural numbers**. (If one wants to prove anything about natural numbers, they can only do so by constructing proofs with *these axioms* and nothing else.)
+
+    > 
+	- There is a natural number 0.
+	- Every natural number n has a successor, denoted by Sn.
+	- There is no natural number whose successor is 0.
+	- Distinct natural numbers have distinct successors.
+    - If a property is possessed by 0, and if it is possesed by Sn any given n, then it is possessed by all natural numbers (induction).
+
+The [Combinatory Logic](https://en.wikipedia.org/wiki/Combinatory_logic) is constructed in the same way, as the terms available in it are variables, and only three *primitive functions* (or "combinators") using which all other terms are built.
+- **Natural Deduction and The Lambda Calculus** - Natural Deduction is similar to the axiomatic system, except it also allows one to make *assumptions*. If you've taken a course in Discrete Math, you must have come across the method for proving an implication, which tends to go by "Assuming p, we prove q". The lambda calculus corresponds this with the introduction of oh-so familiar (anonymous) functions, which take a single argument (corresponding to the assumption) and contain an expression (corresponding to the right hand size of the implication).
+
+This kind of correspondence has been seen and commented upon throughout history in different shapes and forms-
+- In the 1950s, Curry noticed that the types in the combinatory logic correspond to axiomatic schemes in the axiomatic system.
+- In 1968, Howard wrote Formulae as Types, writing on this correspondence, formalising the notion, and showing how cut elimination in proofs corresponded to reduction during term evaluation.
+- In the 1970s, Lambek showed that intuitionistic proofs and combinatory logic combinators share an equational logic called Cartesian Closed Categories.
+- In the 1970s, De Bruijn developed AUTOMATH, a formal system for verifying proofs, the first practical system exploiting the Curry-Howard Isomorphism, being highly influential in the development of proof assistants.
+- In the 1970s 1970s Martin-Löf developed the Type Theory, which had constructs for inductive proofs and universal quantifiers too.
+
+Thus, t
+- Intuitionistic Logic -> The λ-calculus and Combinatory Logic
+- Second-Order Logic -> Polymorphic Lambda Calculus, or [Girard's System F](https://en.wikipedia.org/wiki/System_F) 
+- Predicate Logic -> Different Vertices of the [Lambda Cube](https://en.wikipedia.org/wiki/Lambda_cube)
+- Classical Logic -> [λμ-calculus](https://en.wikipedia.org/wiki/Lambda-mu_calculus) (Models continuations, which models constructs like async and await.)
+- Theory of Communication -> Process Calculi 
+
+Now while all these correspondences between Logical Systems and Theoretical Programming Languages are interesting, especially given how many were discovered independently of each other, how does this have any practical application? Well, when we are dealing with things in computer science, we want to know, "What is computable?". The most famous model of computability is the Turing Machine, and it turns out, that it is *completely* equivalent to the λ-calculus (and also to [Kleene's Recursive Functions](https://en.wikipedia.org/wiki/General_recursive_function).) That is, a function is computable by a computer if and only if it can be expressed as a term of the λ-calculus! (You can replace the constructs in a programming language (assuming it only has natural numbers) with the equivalent λ-calculus terms ant it still works!)
+
+### The Lambda Calculus - A Theory of Functions
+
+Now, what *is* the λ-calculus? It is at its very core, the simplest programming language, built entirely out of functions. Its grammar is below, the first term is variable, the second represents a function application, and the third represents abstraction (or function creation).
+
+$$ M ::= x | (M M) | (\lambda x.M)$$
+
+The λ-calculus has two reduction rules. The first one, also called α-conversion, is simply a renaming rule. It is equivalent to taking a function, and changing the name of the argument while substituting all instances of the argument in the body of the function with that name. The seocnd rule is called β-reduction, and is the process of function application, where upon applying a function, all instances of the argument are substituted with instances of the λ-term that the function is being applied to. (Notice how there is no specification on the *order* of evaluation. If we have a λ-term *(M N)* where both *M* and *N* are β-reducible, then which do we reduce first? Try to convince that yourself that it doesn't matter, and come up with a counterexample otherwise.)
+
+
+$$ \lambda x.M \rightarrow_{\alpha} \lambda y.M[x:=y], y \not \in FV(M)$$
+
+$$ (\lambda x.M)N \rightarrow_{\beta} M[x:=N]$$
+
+formulae as types
+
+proofs as terms
+proofs as programs
+proof normalisation as term reduction
+cut elimination as termr eduction
+
+Pierce's law is inhabited in mu lambda logic
+
+Intuitionistic logics extended
+
+Proposition Logic
+Second-Order proposition Logic
+Weakly higher order proposition logic
+Higher-Order Proposition Logic
+Predicate Logic
+Second-order predicate logic
+Weakly Higher-Order Logic
+
+Lambda Cube, using order 2, 8 different logic. **A formula is provable in a certain logic if it is well typed in the corresponding type system,**
+
+This is what makes us build proof assitants!
+
+The fundamental theorem of Algebra was proved in CoQ
+Proof checking, such as 4 color theorem
+Verification - Compcert -> Compiler verification is done in CoQ (If you fly in an airbus, it is verified!)
+
+Properties of the systems in the cube
+
+- Uniqueness of types
+- Confluence (Church-Rosser property) -> Order of reduction does not matter
+- Type preservation under reduction (Subject Reduction)
+- Termination (Stronger Normalisation)
+- Expressiveness
+
+Typed programs cannot "go wrong"! Safety = Progress + Preservation
+
+What is the problem of Federated Learning!Federated Learning is a machine learning setting where clients keep training data decentralised between computers, formal verification is anothr communication! Need a common language
+
+PTB-FLA (python testbed for federated learning algorithms)
+Communiating Sequential processes calculus (CSP)
+Process Analyssi Toolkit Model Checker (PAT
+
+PAPERS!)
+
+Barendregt - Lambda Calculi with Types
+WA Howard - Formulae as types notions of Construction
+Kastelan - Federated Learning Heneric Algorithms
+
+OPLSS, since 2002 (oregon rpogramming languages)
+Proof Society 2024 - International School on proof Theory
+
+## Tutorial by Priyanka Golia by on SAT Solvers Part I (#sat)
+
+### Introduction
+Logic is about inferring conclusions from given premises. For very simple things, this is easy. Cats have paws, Fluffy has paws, therefore Fluffy has paws. Others are more complex. Self Driving Cars should stop for Stop signs, but not for broken or damaged ones, how do we reason about when the car should stop? This is not easy to answer as a human, thus we need to have automated reasoning. We also need to reason when we're dealing with racial divisions. How can we formally reason about the system being fair across races or castes?
+
+There was a computer vision model, where given a red framed spectacles, it identified incorrectly. This is a case of a poisoned face recognition system. IMPORTANT QUESTIONS: Is it always the case that S satisfies property P? Hoq often S satisfies P? Why doesn't S satisfy P? We use SAT and SMT solvers. Now, these are very hard problems, how do we solve this in NP time?
+
+
+**Satisfiability** - Given a Boolean formula, is there a solution? Assignment of 0's and 1's to the variables that makes the formula equal 1/
+
+$$F(X) = (x_1 \lor x_2) \land (\x)$$ type out all pairssss
+
+SAT Solvers -> if a formula is SAT, gives a satisfying assignment -> Boolean theory
+SMT -> Formulas in different theories -> Linear integer arithmetic, Linear real arithmetic, bit vectors, strings
+
+
+Basic of propositional logic, constraint encoding (if time permits)
+How does SAT solver work and what makes them fast.
+
+All Greeks are human, all humans are mortal, and all greeks are mortal. Can we say the same about: Not all greeks are human, not all humans are mortal, not all greeks are mortal?
+
+Now, writing statements all the time isn't useful. To be able to talk about logical systems, we need to use symbolic variables.
+
+Lets assume that $$\tau$$ is a function that maps variables of a propositional formula to {0,1}. There are 2 to the power of n possible n-tuples which can be apssed as arguments which. Tau satisfies if F(tau) = 1. F is satisfiable if there exists such a tau. It is valid if it is 1 for every f. If it is 0 for every, then unsatisfiable.
+
+Set of all satisfying assignment of F is alled models, models(F)= {tau such that F(tau) = 1}
+Models of negation of F = 2 to the variables - Models(F)
+Models of (F or G) = Models(F) union Models(G)
+And = Intersection
+
+Two formulae are equivalent if they have the same models
+
+SAT solvers take inputs in Conjunction Normal Form (ANDs of ORs). This is because doing reasoning abou t them is easy, and every propositional formula is reducible to CNF form.
+(x1 AND y1) OR (x2 AND y2)...
+Inverse CNF, converting to CNF takes 2^n
+
+Can we better?
+
+There exist equisatisfiable formulae like F=(p OR alpha) AND (NOT p OR beta), G = (alpha AND beta)
+F and G are equisatisfiable. F is satisfiable if and only if G is satisfiable.
+
+Now, we can do better than 2^n with just 3 variables.
+
+If we assign a new variable for each clause, and add double implication clauses, the original gets reduced to one clause, while the new double implications get converted to three terms.
+Thus, we have 3n + 1, which is must better!!!!
+
+Every formula F can be represented in CNF, say Fcnf in polynomyal time such that F is satisfiable if and only if Fcnf is satisfiable. Do we really need both directions?
+
+K Sat is with K different literals in each clause. 2 Sat can be solved in poly times, but we dont know for 3 SAT!!!
+
+Convert 4 SAT into 3 SAT. Can you do the same for 3 SAT for 2 SAT.
+
+Now we come to Constraint Encoding.
+
+How do encode Graph Colouring as a SAT problem?
+
+
+Write your solution here!!!!! 9 variables will be required.
