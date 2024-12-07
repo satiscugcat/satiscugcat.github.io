@@ -233,7 +233,7 @@ Sanya Mittal, a student of Professor Kumar Madhukar, ended the session on neural
 
 ### The Curry-Howard Isomorphism
 
-*(If the title of this sounds interesting to you, but you the stuff discussed below, you may find this video on [Propositions as Types by Philip Wadler](https://youtu.be/IOiZatlZtGU) useful, appealing, and possibly funny.)*
+*(If the title of this sounds interesting to you, but the stuff discussed below seems very foreign, you may find this video on [Propositions as Types by Philip Wadler](https://youtu.be/IOiZatlZtGU) useful, appealing, and funny.)*
 
 This was a talk held by [Silvia Ghilezan](https://imft.ftn.uns.ac.rs/silvia/Main) on the correspondence between logical systems and programming languages, and the applications it has in our day to day lives. This correspondence is famously called the **Curry-Howard Isomorphism**. The Curry-Howard isomorphism was stated in reflection of the fact that throughout history, logicians and computer scientists have kept coming up with logical systems and programming languages (or models of computation) that are suspiciously similar. Some such examples are-
 
@@ -426,4 +426,4 @@ At the end of the day, SAT Solving involves Algorithms, Science, and Art. Algori
 With this, the winter school concluded with a final interaction session with the Formal Methods faculty in IIT Delhi, where we discussed research, the importance of good communication, and the importance of having fun.
 
 
-That concludes the blog! I hope it was useful. I will be maintaining this blog and might add to it even in the future, so if you have any corrections or addendums, feel free to reach me!
+That concludes the blog! I hope it was useful. I will be maintaining this blog and might add to it even in the future, so if you have any corrections or addendums, feel free to reach me at my email!
