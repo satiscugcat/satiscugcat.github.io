@@ -1,0 +1,6 @@
+[submodule "my-website/themes/paper"]
+	path = my-website/themes/paper
+	url = https://github.com/nanxiaobei/hugo-paper
+[submodule "my-website/themes/poison"]
+	path = my-website/themes/poison
+	url = https://github.com/lukeorth/poison.git
