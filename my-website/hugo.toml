@@ -1,9 +1,24 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://satiscugcat.github.io/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
-theme = "poison"
+title = "Aniket's Website"
+theme = "hyde"
 
 
 
 [markup.goldmark.renderer]
   unsafe = true
+
+theme = "hyde"
+
+[Menus]
+  main = [
+      {Name = "Email", URL = "mailto:23110026@iitgn.ac.in"},
+      {Name = "Github", URL = "https://github.com/satiscugcat/"},
+      {Name = "LAMBDA", URL = '/lambda/about/'}
+      
+  ]
+
+
+[params]
+  themeColor = "theme-base-08"
+  description = "A static website to organise and express my thoughts. Generated using ox-hugo."  

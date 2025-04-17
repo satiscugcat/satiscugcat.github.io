@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tag1 on My New Hugo Site</title>
+    <title>Tag1 on A Nerdy Website</title>
     <link>http://localhost:1313/tags/tag1/</link>
-    <description>Recent content in Tag1 on My New Hugo Site</description>
+    <description>Recent content in Tag1 on A Nerdy Website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 23 Mar 2025 14:03:00 +0530</lastBuildDate>

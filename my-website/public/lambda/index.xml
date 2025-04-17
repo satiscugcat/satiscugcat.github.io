@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Index on Aniket&#39;s Website</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content in Index on Aniket&#39;s Website</description>
+    <title>Lambda on Aniket&#39;s Website</title>
+    <link>http://localhost:1313/lambda/</link>
+    <description>Recent content in Lambda on Aniket&#39;s Website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 17 Apr 2025 21:13:00 +0530</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/lambda/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About LAMBDA</title>
       <link>http://localhost:1313/lambda/about/</link>
       <pubDate>Thu, 17 Apr 2025 21:13:00 +0530</pubDate>
       <guid>http://localhost:1313/lambda/about/</guid>
       <description>&lt;p&gt;LAMBDA is a hobby group in IIT Gandhinagar, which primarily deals with Programming Languages and related topics, with a focus on more of theoretical aspects. It was initiated through a proposal to the student senate of IITGN by me in October 2023. Our overarching goals are to -&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;spread awareness of PLT and related topics on the IITGN campus.&lt;/li&gt;&#xA;&lt;li&gt;stay in touch with the current research in PLT and related fields.&lt;/li&gt;&#xA;&lt;li&gt;keep in touch with people working in PLs and related field across India.&lt;/li&gt;&#xA;&lt;li&gt;conduct meaningful projects which should at the very least, advance the understanding of the students involved with them.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Its current members are -&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Hello World!</title>
-      <link>http://localhost:1313/posts/hello-world/</link>
-      <pubDate>Thu, 17 Apr 2025 21:13:00 +0530</pubDate>
-      <guid>http://localhost:1313/posts/hello-world/</guid>
-      <description>&lt;p&gt;Hello, this is my first post upon migrating to Hugo for generating my site.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -1,8 +1,53 @@
 #+hugo_base_dir: ../
+#+OPTIONS: ^:nil
+* Website
+** DONE Index
+   CLOSED: [2025-04-17 Thu 21:13]
+   :PROPERTIES:
+   :EXPORT_HUGO_SECTION: /
+   :EXPORT_FILE_NAME: _index
+   :END:
 
-* DONE My first post                                           :tag1:@category1:
-  CLOSED: [2025-03-23 Sun 14:03]
-:PROPERTIES:
-:EXPORT_FILE_NAME: my-first-post
-:END:
-This is my post body
+   Welcome to my website! I am Aniket Mishra, currently pursuing my Bachelor of Technology in Computer Science at IIT Gandhinagar. I am an upcoming intern for [[https://cryspen.com/][Cryspen]], who I will work with to extend and improve the [[https://github.com/cryspen/hax][hax Rust verification framework]]. I also currently lead @@hugo:[LAMBDA]({{< relref "lambda/about">}})@@, a group/club in IIT Gandhinagar that is focussed on PL Theory and related fields. You can find my CV (along with other contact information) [[/moderncv.pdf][here]].
+   
+** BLOG-POSTS
+   :PROPERTIES:
+   :CATEGORY: blog-posts
+   :END:
+*** DONE Hello World!
+    CLOSED: [2025-04-17 Thu 21:13]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: hello-world
+   :END:
+
+   Hello, this is my first post upon migrating to Hugo for generating my site.
+** DONE LAMBDA
+   CLOSED: [2025-04-17 Thu 21:13]
+   :PROPERTIES:
+   :EXPORT_HUGO_SECTION: /lambda
+   :END:
+*** DONE About LAMBDA
+    CLOSED: [2025-04-17 Thu 21:13]
+    :PROPERTIES:
+    :EXPORT_FILE_NAME: about
+    :END:
+    LAMBDA is a hobby group in IIT Gandhinagar, which primarily deals with Programming Languages and related topics, with a focus on more of theoretical aspects. It was initiated through a proposal to the student senate of IITGN by me in October 2023. Our overarching goals are to -
+    1. spread awareness of PLT and related topics on the IITGN campus.
+    2. stay in touch with the current research in PLT and related fields.
+    3. keep in touch with people working in PLs and related field across India.
+    4. conduct meaningful projects which should at the very least, advance the understanding of the students involved with them.
+
+    Its current members are -
+    * Aniket Mishra (That's me!)
+    * [[mailto:23110146@iitgn.ac.in][Jaskirat Singh Maskeen]]
+    * [[mailto:23110040@iitgn.ac.in][Arjun B Dixit]]
+    * [[mailto:24110142@iitgn.ac.in][Gella Naga Sai Krishna]]
+    * [[mailto:24110048@iitgn.ac.in][Anvit Aggrawal]]
+    * [[mailto:neal.pineda@iitgn.ac.in][Neal Apte Pineda]]
+
+   If you want to check out the things we are working on/plan to work on, we track those things at [[https://github.com/satiscugcat/lambda-org][this github repo]]. If you'd like to reach out to us to collaborate, please do send an email!
+
+      
+    
+    
+   
