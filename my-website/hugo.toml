@@ -21,4 +21,8 @@ theme = "hyde"
 
 [params]
   themeColor = "theme-base-08"
-  description = "A static website to organise and express my thoughts. Generated using ox-hugo."  
+  description = "A static website to organise and express my thoughts. Generated using ox-hugo."
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'

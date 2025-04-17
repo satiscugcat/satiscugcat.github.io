@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>About LAMBDA on Aniket&#39;s Website</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>http://localhost:46807/posts/</link>
     <description>Recent content in About LAMBDA on Aniket&#39;s Website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 17 Apr 2025 21:13:00 +0530</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:46807/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hello World!</title>
-      <link>http://localhost:1313/posts/hello-world/</link>
+      <link>http://localhost:46807/posts/hello-world/</link>
       <pubDate>Thu, 17 Apr 2025 21:13:00 +0530</pubDate>
-      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <guid>http://localhost:46807/posts/hello-world/</guid>
       <description>&lt;p&gt;Hello, this is my first post upon migrating to Hugo for generating my site.&lt;/p&gt;</description>
     </item>
   </channel>
