@@ -9,8 +9,18 @@
    :END:
 
    Welcome to my website! I am Aniket Mishra, currently pursuing my Bachelor of Technology in Computer Science at IIT Gandhinagar. I am an upcoming intern for [[https://cryspen.com/][Cryspen]], who I will work with to extend and improve the [[https://github.com/cryspen/hax][hax Rust verification framework]]. I also currently lead @@hugo:[LAMBDA]({{< relref "lambda/about">}})@@, a group/club in IIT Gandhinagar that is focussed on PL Theory and related fields. You can find my CV (along with other contact information) [[/moderncv.pdf][here]].
-   
-** BLOG-POSTS
+** DONE Miscellaneous
+   CLOSED: [2025-04-21 Mon 11:55]
+   :PROPERTIES:
+   :EXPORT_HUGO_SECTION: /
+   :EXPORT_FILE_NAME: misc
+   :END:
+   Hello! Here are some miscellaneous things to look at.
+*** Some Links to Click
+    Here are some websites worth checking out.
+    + *[[https://www.typetheoryforall.com/][Type Theory Forall]]* - A cool podcast on PLT and Type Theory.
+    + *[[https://initiatives.iitgn.ac.in/nyasa/][Nyasa]]* - Volunteer Organisation in IIT Gandhinagar focussed on helping impoverished communities near the campus.
+** BLOG-POSTS  :blogposts:
    :PROPERTIES:
    :CATEGORY: blog-posts
    :END:

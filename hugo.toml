@@ -14,7 +14,8 @@ theme = "hyde"
   main = [
       {Name = "Email", URL = "mailto:23110026@iitgn.ac.in"},
       {Name = "Github", URL = "https://github.com/satiscugcat/"},
-      {Name = "LAMBDA", URL = '/lambda/about/'}
+      {Name = "LAMBDA", URL = '/lambda/about/'},
+      {Name = "Misc", URL = "/misc/"}
       
   ]
 

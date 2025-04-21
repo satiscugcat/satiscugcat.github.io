@@ -2,7 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://satiscugcat.github.io/misc/</loc>
+    <lastmod>2025-04-21T11:55:00+05:30</lastmod>
+  </url><url>
     <loc>https://satiscugcat.github.io/lambda/about/</loc>
+    <lastmod>2025-04-17T21:13:00+05:30</lastmod>
+  </url><url>
+    <loc>https://satiscugcat.github.io/tags/blogposts/</loc>
     <lastmod>2025-04-17T21:13:00+05:30</lastmod>
   </url><url>
     <loc>https://satiscugcat.github.io/posts/hello-world/</loc>
@@ -14,11 +20,12 @@
     <loc>https://satiscugcat.github.io/lambda/</loc>
     <lastmod>2025-04-17T21:13:00+05:30</lastmod>
   </url><url>
+    <loc>https://satiscugcat.github.io/tags/</loc>
+    <lastmod>2025-04-17T21:13:00+05:30</lastmod>
+  </url><url>
     <loc>https://satiscugcat.github.io/posts/</loc>
     <lastmod>2025-04-13T23:41:00+05:30</lastmod>
   </url><url>
     <loc>https://satiscugcat.github.io/categories/</loc>
-  </url><url>
-    <loc>https://satiscugcat.github.io/tags/</loc>
   </url>
 </urlset>
