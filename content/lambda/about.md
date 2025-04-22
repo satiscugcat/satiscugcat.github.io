@@ -19,5 +19,6 @@ Its current members are -
 -   [Gella Naga Sai Krishna](mailto:24110142@iitgn.ac.in)
 -   [Anvit Aggrawal](mailto:24110048@iitgn.ac.in)
 -   [Neal Apte Pineda](mailto:neal.pineda@iitgn.ac.in)
+-   [Tanish Yelgoe](mailto:23110328@iitgn.ac.in)
 
 If you want to check out the things we are working on/plan to work on, we track those things at [this github repo](https://github.com/satiscugcat/lambda-org). If you'd like to reach out to us to collaborate, please do send an email!
