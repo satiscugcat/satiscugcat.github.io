@@ -12,7 +12,7 @@ theme = "hyde"
 
 [Menus]
   main = [
-      {Name = "Email", URL = "mailto:23110026@iitgn.ac.in"},
+      {Name = "Email", URL = "mailto:aniket.mishra@iitgn.ac.in"},
       {Name = "Github", URL = "https://github.com/satiscugcat/"},
       {Name = "LAMBDA", URL = '/lambda/about/'},
       {Name = "Misc", URL = "/misc/"}

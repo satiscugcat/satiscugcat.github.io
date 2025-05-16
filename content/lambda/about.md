@@ -14,11 +14,11 @@ LAMBDA is a hobby group in IIT Gandhinagar, which primarily deals with Programmi
 Its current members are -
 
 -   Aniket Mishra (That's me!)
--   [Jaskirat Singh Maskeen](mailto:23110146@iitgn.ac.in)
+-   [Jaskirat Singh Maskeen](mailto:jaskirat.maskeen@iitgn.ac.in)
 -   [Arjun B Dixit](mailto:23110040@iitgn.ac.in)
--   [Gella Naga Sai Krishna](mailto:24110142@iitgn.ac.in)
--   [Anvit Aggrawal](mailto:24110048@iitgn.ac.in)
+-   [Gella Naga Sai Krishna](mailto:gella.saikrishna@iitgn.ac.in)
+-   [Anvit Aggrawal](mailto:anvit.aggarwal@iitgn.ac.in)
 -   [Neal Apte Pineda](mailto:neal.pineda@iitgn.ac.in)
--   [Tanish Yelgoe](mailto:23110328@iitgn.ac.in)
+-   [Tanish Yelgoe](mailto:tanish.yelgoe@iitgn.ac.in)
 
 If you want to check out the things we are working on/plan to work on, we track those things at [this github repo](https://github.com/satiscugcat/lambda-org). If you'd like to reach out to us to collaborate, please do send an email!
