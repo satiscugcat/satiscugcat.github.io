@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Aniket&#39;s Website</title>
-    <link>https://satiscugcat.github.io/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on Aniket&#39;s Website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 17 Apr 2025 21:13:00 +0530</lastBuildDate>
-    <atom:link href="https://satiscugcat.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Blogposts</title>
-      <link>https://satiscugcat.github.io/tags/blogposts/</link>
+      <link>http://localhost:1313/tags/blogposts/</link>
       <pubDate>Thu, 17 Apr 2025 21:13:00 +0530</pubDate>
-      <guid>https://satiscugcat.github.io/tags/blogposts/</guid>
+      <guid>http://localhost:1313/tags/blogposts/</guid>
       <description></description>
     </item>
   </channel>

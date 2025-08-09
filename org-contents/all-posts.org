@@ -8,7 +8,7 @@
    :EXPORT_FILE_NAME: _index
    :END:
 
-   Welcome to my website! I am Aniket Mishra, currently pursuing my Bachelor of Technology in Computer Science at IIT Gandhinagar. I am an upcoming intern for [[https://cryspen.com/][Cryspen]], who I will work with to extend and improve the [[https://github.com/cryspen/hax][hax Rust verification framework]]. I also currently lead @@hugo:[LAMBDA]({{< relref "lambda/about">}})@@, a group/club in IIT Gandhinagar that is focussed on PL Theory and related fields. You can find my CV (along with other contact information) [[/moderncv.pdf][here]].
+   Welcome to my website! I am Aniket Mishra, currently pursuing my Bachelor of Technology in Computer Science at IIT Gandhinagar. I also currently lead @@hugo:[,\ AMBDA.]({{< relref "lambda/about">}})@@, a group/club in IIT Gandhinagar that is focussed on PL Theory and related fields. You can find my CV (along with other contact information) [[/moderncv.pdf][here]].
 ** DONE Miscellaneous
    CLOSED: [2025-04-21 Mon 11:55]
    :PROPERTIES:
@@ -36,15 +36,18 @@
    :PROPERTIES:
    :EXPORT_HUGO_SECTION: /lambda
    :END:
-*** DONE About LAMBDA
+*** DONE About ,\ AMBDA.
     CLOSED: [2025-04-17 Thu 21:13]
     :PROPERTIES:
     :EXPORT_FILE_NAME: about
     :END:
-    LAMBDA is a hobby group in IIT Gandhinagar, which primarily deals with Programming Languages and related topics, with a focus on more of theoretical aspects. It was initiated through a proposal to the student senate of IITGN by me in October 2023. Our overarching goals are to -
+
+    [[/lambdalogo.svg]]
+    
+    ,\ AMBDA. is a hobby group in IIT Gandhinagar, which primarily deals with Programming Languages and related topics, with a focus on more of theoretical aspects. It was initiated through a proposal to the student senate of IITGN by me in October 2024. Our overarching goals are to -
     1. spread awareness of PLT and related topics on the IITGN campus.
     2. stay in touch with the current research in PLT and related fields.
-    3. keep in touch with people working in PLs and related field across India.
+    3. keep in touch with people working in PLs and related fields across India.
     4. conduct meaningful projects which should at the very least, advance the understanding of the students involved with them.
 
     Its current members are -

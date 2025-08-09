@@ -1,0 +1,9 @@
+# Fdb version 4
+["pdflatex"] 0 "moderncv.tex" "moderncv.pdf" "moderncv" 0 -1
+  "moderncv.aux" 0 -1 0 "pdflatex"
+  "moderncv.tex" 0 -1 0 ""
+  (generated)
+  "moderncv.aux"
+  "moderncv.log"
+  "moderncv.pdf"
+  (rewritten before read)
