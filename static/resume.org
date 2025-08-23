@@ -1,6 +1,6 @@
 #+TITLE: BTech Student
 #+AUTHOR: Aniket Mishra
-#+email: 23110026@iitgn.ac.in
+#+email: aniket.mishra@iitgn.ac.in
 #+options: tags:nil
 
 #+ADDRESS: IIT Gandhinagar
